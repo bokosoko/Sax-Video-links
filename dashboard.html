@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ViralVid Admin Dashboard - Manage your platform">
+    <title>Admin Dashboard - ViralVid</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="admin-dashboard">
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-container">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="../index.html">
+                        <img src="../assets/logo.svg" alt="ViralVid Logo" class="logo">
+                        <span class="brand-name">ViralVid</span>
+                        <span class="admin-badge">Admin</span>
+                    </a>
+                </div>
+                
+                <nav class="admin-nav">
+                    <a href="#dashboard" class="admin-nav-link active" onclick="showSection('dashboard')">Dashboard</a>
+                    <a href="#videos" class="admin-nav-link" onclick="showSection('videos')">Videos</a>
+                    <a href="#users" class="admin-nav-link" onclick="showSection('users')">Users</a>
+                    <a href="#analytics" class="admin-nav-link" onclick="showSection('analytics')">Analytics</a>
+                    <a href="#settings" class="admin-nav-link" onclick="showSection('settings')">Settings</a>
+                </nav>
+                
+                <div class="admin-user">
+                    <div class="admin-avatar">A</div>
+                    <div class="admin-user-info">
+                        <div class="admin-user-name">Admin User</div>
+                        <div class="admin-user-role">Administrator</div>
+                    </div>
+                    <button class="btn btn-outline" onclick="adminAuth.logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Main Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">Dashboard Overview</h1>
+                    <p class="admin-page-subtitle">Welcome to your ViralVid administration panel</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="admin-grid admin-grid-4">
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-header">
+                            <div class="admin-stat-icon primary">📊</div>
+                            <div class="admin-stat-trend up">+12%</div>
+                        </div>
+                        <div class="admin-stat-number" id="totalVideos">1,234</div>
+                        <div class="admin-stat-label">Total Videos</div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-header">
+                            <div class="admin-stat-icon success">👥</div>
+                            <div class="admin-stat-trend up">+8%</div>
+                        </div>
+                        <div class="admin-stat-number" id="totalUsers">5,678</div>
+                        <div class="admin-stat-label">Active Users</div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-header">
+                            <div class="admin-stat-icon warning">👁️</div>
+                            <div class="admin-stat-trend up">+25%</div>
+                        </div>
+                        <div class="admin-stat-number" id="totalViews">2.1M</div>
+                        <div class="admin-stat-label">Total Views</div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-header">
+                            <div class="admin-stat-icon danger">🚀</div>
+                            <div class="admin-stat-trend up">+45%</div>
+                        </div>
+                        <div class="admin-stat-number" id="viralVideos">89</div>
+                        <div class="admin-stat-label">Viral Videos</div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="admin-grid admin-grid-2">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">Recent Videos</h3>
+                            <p class="admin-card-subtitle">Latest uploaded content</p>
+                        </div>
+                        <div class="admin-card-body">
+                            <div id="recentVideos" class="admin-loading">
+                                <div class="spinner"></div>
+                                Loading recent videos...
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">System Activity</h3>
+                            <p class="admin-card-subtitle">Recent admin actions</p>
+                        </div>
+                        <div class="admin-card-body">
+                            <div id="systemActivity" class="admin-loading">
+                                <div class="spinner"></div>
+                                Loading activity log...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Videos Section -->
+            <section id="videos-section" class="admin-section">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">Video Management</h1>
+                    <p class="admin-page-subtitle">Manage all videos on the platform</p>
+                </div>
+
+                <!-- Video Management Controls -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3 class="admin-card-title">Upload New Video</h3>
+                        <p class="admin-card-subtitle">Add content to the platform</p>
+                    </div>
+                    <div class="admin-card-body">
+                        <form id="videoUploadForm" onsubmit="handleVideoUpload(event)">
+                            <div class="admin-grid admin-grid-2">
+                                <div class="form-group">
+                                    <label for="videoTitle">Video Title</label>
+                                    <input type="text" id="videoTitle" name="title" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="videoCategory">Category</label>
+                                    <select id="videoCategory" name="category" required>
+                                        <option value="">Select Category</option>
+                                        <option value="entertainment">Entertainment</option>
+                                        <option value="comedy">Comedy</option>
+                                        <option value="music">Music</option>
+                                        <option value="sports">Sports</option>
+                                        <option value="lifestyle">Lifestyle</option>
+                                        <option value="tech">Technology</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="videoDescription">Description</label>
+                                <textarea id="videoDescription" name="description" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="videoFile">Video File</label>
+                                <input type="file" id="videoFile" name="file" accept="video/*" required>
+                                <div class="form-help">Supported formats: MP4, AVI, MOV, WMV (Max: 100MB)</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="videoThumbnail">Thumbnail (Optional)</label>
+                                <input type="file" id="videoThumbnail" name="thumbnail" accept="image/*">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-admin">
+                                <span class="btn-text">Upload Video</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <span class="spinner"></span>
+                                    Uploading...
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Videos List -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3 class="admin-card-title">All Videos</h3>
+                        <p class="admin-card-subtitle">Manage existing videos</p>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Views</th>
+                                        <th>Uploaded</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="videosTableBody">
+                                    <tr>
+                                        <td colspan="6" class="admin-loading">
+                                            <div class="spinner"></div>
+                                            Loading videos...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users-section" class="admin-section">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">User Management</h1>
+                    <p class="admin-page-subtitle">Manage platform users and permissions</p>
+                </div>
+
+                <!-- User Stats -->
+                <div class="admin-grid admin-grid-3">
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-header">
+                            <div class="admin-stat-icon success">✅</div>
+                        </div>
+                        <div class="admin-stat-number" id="activeUsers">4,567</div>
+                        <div class="admin-stat-label">Active Users</div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-header">
+                            <div class="admin-stat-icon warning">⏸️</div>
+                        </div>
+                        <div class="admin-stat-number" id="suspendedUsers">23</div>
+                        <div class="admin-stat-label">Suspended Users</div>
+                    </div>
+                    
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-header">
+                            <div class="admin-stat-icon primary">📅</div>
+                        </div>
+                        <div class="admin-stat-number" id="newUsersToday">45</div>
+                        <div class="admin-stat-label">New Today</div>
+                    </div>
+                </div>
+
+                <!-- Users List -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3 class="admin-card-title">All Users</h3>
+                        <p class="admin-card-subtitle">Manage user accounts</p>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Email</th>
+                                        <th>Videos</th>
+                                        <th>Joined</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody">
+                                    <tr>
+                                        <td colspan="6" class="admin-loading">
+                                            <div class="spinner"></div>
+                                            Loading users...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="admin-section">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">Analytics & Reports</h1>
+                    <p class="admin-page-subtitle">Platform performance insights</p>
+                </div>
+
+                <!-- Analytics Cards -->
+                <div class="admin-grid admin-grid-2">
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">Traffic Overview</h3>
+                            <p class="admin-card-subtitle">Last 30 days</p>
+                        </div>
+                        <div class="admin-card-body">
+                            <div id="trafficChart" class="chart-placeholder">
+                                <div class="chart-icon">📈</div>
+                                <p>Traffic analytics chart would be displayed here</p>
+                                <small>Integration with charting library required</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">Popular Content</h3>
+                            <p class="admin-card-subtitle">Top performing videos</p>
+                        </div>
+                        <div class="admin-card-body">
+                            <div id="popularContent" class="admin-loading">
+                                <div class="spinner"></div>
+                                Loading popular content...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Analytics -->
+                <div class="admin-card">
+                    <div class="admin-card-header">
+                        <h3 class="admin-card-title">Detailed Reports</h3>
+                        <p class="admin-card-subtitle">Comprehensive platform analytics</p>
+                    </div>
+                    <div class="admin-card-body">
+                        <div class="admin-grid admin-grid-4">
+                            <div class="metric-card">
+                                <div class="metric-icon">👀</div>
+                                <div class="metric-value">2.1M</div>
+                                <div class="metric-label">Total Views</div>
+                                <div class="metric-change positive">+15.3%</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-icon">⏱️</div>
+                                <div class="metric-value">4.2m</div>
+                                <div class="metric-label">Avg. Watch Time</div>
+                                <div class="metric-change positive">+8.7%</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-icon">💬</div>
+                                <div class="metric-value">45.2K</div>
+                                <div class="metric-label">Comments</div>
+                                <div class="metric-change positive">+22.1%</div>
+                            </div>
+                            
+                            <div class="metric-card">
+                                <div class="metric-icon">❤️</div>
+                                <div class="metric-value">156K</div>
+                                <div class="metric-label">Likes</div>
+                                <div class="metric-change positive">+18.9%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="admin-section">
+                <div class="admin-page-header">
+                    <h1 class="admin-page-title">System Settings</h1>
+                    <p class="admin-page-subtitle">Configure platform settings</p>
+                </div>
+
+                <div class="admin-grid admin-grid-2">
+                    <!-- General Settings -->
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">General Settings</h3>
+                            <p class="admin-card-subtitle">Basic platform configuration</p>
+                        </div>
+                        <div class="admin-card-body">
+                            <form id="generalSettingsForm" onsubmit="handleGeneralSettings(event)">
+                                <div class="form-group">
+                                    <label for="siteName">Site Name</label>
+                                    <input type="text" id="siteName" name="siteName" value="ViralVid">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="siteDescription">Site Description</label>
+                                    <textarea id="siteDescription" name="siteDescription" rows="3">The ultimate video sharing platform for viral content</textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="maxFileSize">Max Video File Size (MB)</label>
+                                    <input type="number" id="maxFileSize" name="maxFileSize" value="100" min="1" max="1000">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="allowRegistration" name="allowRegistration" checked>
+                                        <span class="checkmark"></span>
+                                        Allow new user registration
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-admin">Save Settings</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="admin-card">
+                        <div class="admin-card-header">
+                            <h3 class="admin-card-title">Security Settings</h3>
+                            <p class="admin-card-subtitle">Admin security configuration</p>
+                        </div>
+                        <div class="admin-card-body">
+                            <form id="securitySettingsForm" onsubmit="handleSecuritySettings(event)">
+                                <div class="form-group">
+                                    <label for="sessionTimeout">Session Timeout (hours)</label>
+                                    <input type="number" id="sessionTimeout" name="sessionTimeout" value="8" min="1" max="24">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="require2FA" name="require2FA">
+                                        <span class="checkmark"></span>
+                                        Require two-factor authentication
+                                    </label>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="logAdminActions" name="logAdminActions" checked>
+                                        <span class="checkmark"></span>
+                                        Log all admin actions
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-admin">Update Security</button>
+                            </form>
+                            
+                            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--secondary-200);">
+                            
+                            <div class="security-actions">
+                                <h4>Security Actions</h4>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+                                    <button class="btn btn-outline" onclick="handleChangePassword()">Change Password</button>
+                                    <button class="btn btn-outline" onclick="handleEnable2FA()">Enable 2FA</button>
+                                    <button class="btn btn-outline" onclick="handleViewLogs()">View Activity Logs</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/admin-auth.js"></script>
+    <script src="../js/admin-dashboard.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
+

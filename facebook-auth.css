@@ -1,0 +1,264 @@
+/* Facebook Authentication Styles */
+
+.facebook-only-notice {
+    text-align: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.notice-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.facebook-only-notice h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.facebook-only-notice p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.btn-facebook {
+    background: linear-gradient(135deg, #1877f2, #42a5f5);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+}
+
+.btn-facebook:hover {
+    background: linear-gradient(135deg, #166fe5, #1976d2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+}
+
+.btn-facebook:active {
+    transform: translateY(0);
+}
+
+.facebook-icon {
+    font-size: 1.2rem;
+}
+
+.facebook-benefits {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.facebook-benefits h5 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.facebook-benefits ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.facebook-benefits li {
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.facebook-benefits li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--primary-500);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* User Profile Styles */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-name {
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.logout-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Loading States */
+.facebook-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.facebook-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Error States */
+.facebook-error {
+    background: linear-gradient(135deg, #f44336, #e57373);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Success States */
+.facebook-success {
+    background: linear-gradient(135deg, #4caf50, #81c784);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .facebook-only-notice {
+        padding: 1.5rem 0;
+    }
+    
+    .notice-icon {
+        font-size: 2.5rem;
+    }
+    
+    .btn-facebook {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .user-profile {
+        gap: 0.5rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .user-name {
+        max-width: 80px;
+        font-size: 0.8rem;
+    }
+    
+    .logout-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .facebook-only-notice {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .facebook-benefits {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .btn-facebook {
+        border: 2px solid #1877f2;
+    }
+    
+    .user-profile {
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .btn-facebook,
+    .logout-btn {
+        transition: none;
+    }
+    
+    .facebook-loading::after {
+        animation: none;
+    }
+    
+    .facebook-error {
+        animation: none;
+    }
+}
+

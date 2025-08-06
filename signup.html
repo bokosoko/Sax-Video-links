@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for ViralVid - Create your account">
+    <title>Sign Up - ViralVid</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <!-- Navigation Header -->
+    <header class="auth-navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="../index.html">
+                    <img src="../assets/logo.svg" alt="ViralVid Logo" class="logo">
+                    <span class="brand-name">ViralVid</span>
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="../index.html" class="btn btn-outline">Back to Home</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Signup Form Section -->
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Create Account</h1>
+                    <p>Join ViralVid and start sharing your content</p>
+                </div>
+                
+                <div class="auth-body">
+                    <!-- Signup Form -->
+                    <form id="signupForm" class="auth-form" onsubmit="handleSignup(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input 
+                                    type="text" 
+                                    id="firstName" 
+                                    name="firstName" 
+                                    placeholder="First name"
+                                    required
+                                    autocomplete="given-name"
+                                >
+                                <div class="form-error" id="firstNameError"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input 
+                                    type="text" 
+                                    id="lastName" 
+                                    name="lastName" 
+                                    placeholder="Last name"
+                                    required
+                                    autocomplete="family-name"
+                                >
+                                <div class="form-error" id="lastNameError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Enter your email"
+                                required
+                                autocomplete="email"
+                            >
+                            <div class="form-error" id="emailError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                placeholder="Choose a username"
+                                required
+                                autocomplete="username"
+                            >
+                            <div class="form-help">This will be your unique identifier on ViralVid</div>
+                            <div class="form-error" id="usernameError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-input">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    placeholder="Create a password"
+                                    required
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                    <span class="toggle-icon">👁️</span>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="passwordStrength"></div>
+                            <div class="form-error" id="passwordError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="password-input">
+                                <input 
+                                    type="password" 
+                                    id="confirmPassword" 
+                                    name="confirmPassword" 
+                                    placeholder="Confirm your password"
+                                    required
+                                    autocomplete="new-password"
+                                >
+                                <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                    <span class="toggle-icon">👁️</span>
+                                </button>
+                            </div>
+                            <div class="form-error" id="confirmPasswordError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>
+                            </label>
+                            <div class="form-error" id="agreeTermsError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                Send me updates about new features and content
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full auth-submit">
+                            <span class="btn-text">Create Account</span>
+                            <span class="btn-loading" style="display: none;">
+                                <span class="spinner"></span>
+                                Creating account...
+                            </span>
+                        </button>
+                    </form>
+                    
+                    <!-- Social Login -->
+                    <div class="social-login">
+                        <div class="divider">
+                            <span>or sign up with</span>
+                        </div>
+                        
+                        <button class="btn btn-facebook btn-full" onclick="handleFacebookSignup()">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                            Sign up with Facebook
+                        </button>
+                        
+                        <button class="btn btn-google btn-full" onclick="handleGoogleSignup()">
+                            <svg class="social-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                            Sign up with Google
+                        </button>
+                    </div>
+                    
+                    <!-- Login Link -->
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="login.html" class="auth-link">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Side Panel -->
+            <div class="auth-side">
+                <div class="side-content">
+                    <h2>Start Your Journey</h2>
+                    <p>Join thousands of creators who are already sharing their viral content on ViralVid.</p>
+                    
+                    <div class="side-stats">
+                        <div class="stat">
+                            <div class="stat-number">10M+</div>
+                            <div class="stat-label">Videos Shared</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">2M+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">500K+</div>
+                            <div class="stat-label">Creators</div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-testimonial">
+                        <blockquote>
+                            "ViralVid helped me reach millions of viewers and turn my passion into a career. The platform is incredible!"
+                        </blockquote>
+                        <cite>- Sarah Johnson, Content Creator</cite>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success/Error Messages -->
+    <div id="messageContainer" class="message-container"></div>
+
+    <!-- JavaScript Files -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
+

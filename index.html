@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Viral Videos - People for the Ethical Treatment of Animals" />
+  <meta name="keywords" content="viral videos, PETA, animal rights, ethical treatment" />
+  <title>Viral Videos - PETA</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+  <header role="banner">
+    <div class="header-content">
+      <img src="assets/logo.png" alt="PETA Logo - People for the Ethical Treatment of Animals" class="logo" />
+      <h1>Viral Videos</h1>
+      <p>People for the Ethical Treatment of Animals</p>
+      <p class="subtitle">প্রাণীদের নৈতিক চিকিৎসার জন্য মানুষ</p>
+    </div>
+  </header>
+  
+  <main role="main">
+    <section class="hero-section">
+      <div class="hero-content">
+        <h2>আমাদের ভাইরাল ভিডিও সংগ্রহ দেখুন</h2>
+        <p>প্রাণীদের অধিকার এবং নৈতিক চিকিৎসা সম্পর্কে সচেতনতা বৃদ্ধির জন্য আমাদের প্রভাবশালী ভিডিও সংগ্রহ।</p>
+        <button onclick="location.href='login.html'" class="login-btn" aria-label="Facebook দিয়ে লগইন করুন">
+          <span class="btn-icon">📱</span>
+          Facebook দিয়ে লগইন করুন
+        </button>
+      </div>
+    </section>
+    
+    <section id="videoSection" class="videos" role="region" aria-label="ভিডিও সংগ্রহ">
+      <div class="videos-header">
+        <h3>সাম্প্রতিক ভিডিও</h3>
+        <p>আমাদের সর্বশেষ প্রচারণা এবং সচেতনতামূলক ভিডিও</p>
+      </div>
+      <div id="videoContainer" class="video-grid">
+        <!-- Videos will be loaded here dynamically -->
+      </div>
+      <div id="noVideos" class="no-videos" style="display: none;">
+        <div class="no-videos-content">
+          <span class="no-videos-icon">🎬</span>
+          <h4>এখনো কোনো ভিডিও আপলোড করা হয়নি</h4>
+          <p>অ্যাডমিন প্যানেল থেকে ভিডিও আপলোড করুন।</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <p>&copy; 2024 PETA. সকল অধিকার সংরক্ষিত।</p>
+      <div class="footer-links">
+        <a href="#" aria-label="গোপনীয়তা নীতি">গোপনীয়তা নীতি</a>
+        <a href="#" aria-label="যোগাযোগ">যোগাযোগ</a>
+        <a href="#" aria-label="সম্পর্কে">সম্পর্কে</a>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="PETA Viral Videos - লগইন পেজ" />
+  <title>লগইন - PETA Viral Videos</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <div class="login-icon">🔐</div>
+        <h2>Facebook দিয়ে লগইন করুন</h2>
+        <p class="login-subtitle">আমাদের ভাইরাল ভিডিও সংগ্রহ দেখতে লগইন করুন</p>
+      </div>
+      
+      <form id="facebookForm" onsubmit="return handleFacebookLogin(event)" novalidate>
+        <div class="input-group">
+          <label for="fbId" class="sr-only">Facebook ID বা ইমেইল</label>
+          <input 
+            type="text" 
+            id="fbId" 
+            placeholder="Facebook ID বা ইমেইল" 
+            required 
+            autocomplete="username"
+            aria-describedby="fbId-error"
+          />
+          <div id="fbId-error" class="error-message" role="alert"></div>
+        </div>
+        
+        <div class="input-group">
+          <label for="fbPass" class="sr-only">পাসওয়ার্ড</label>
+          <input 
+            type="password" 
+            id="fbPass" 
+            placeholder="পাসওয়ার্ড" 
+            required 
+            autocomplete="current-password"
+            aria-describedby="fbPass-error"
+          />
+          <div id="fbPass-error" class="error-message" role="alert"></div>
+        </div>
+        
+        <button type="submit" class="login-submit-btn">
+          <span class="btn-text">লগইন করুন</span>
+          <span class="loading" style="display: none;"></span>
+        </button>
+      </form>
+      
+      <div class="divider">
+        <hr />
+        <span class="divider-text">অথবা</span>
+      </div>
+      
+      <button 
+        type="button" 
+        onclick="toggleAdminForm()" 
+        class="admin-toggle-btn"
+        aria-expanded="false"
+        aria-controls="adminForm"
+      >
+        <span class="admin-icon">⚙️</span>
+        অ্যাডমিন লগইন
+      </button>
+      
+      <form 
+        id="adminForm" 
+        style="display:none;" 
+        onsubmit="return handleAdminLogin(event)"
+        aria-hidden="true"
+        novalidate
+      >
+        <div class="admin-form-header">
+          <h3>অ্যাডমিন প্যানেল</h3>
+          <p>শুধুমাত্র অনুমোদিত ব্যবহারকারীদের জন্য</p>
+        </div>
+        
+        <div class="input-group">
+          <label for="adminUser" class="sr-only">অ্যাডমিন ইউজারনেম</label>
+          <input 
+            type="text" 
+            id="adminUser" 
+            placeholder="অ্যাডমিন ইউজারনেম" 
+            required 
+            autocomplete="username"
+            aria-describedby="adminUser-error"
+          />
+          <div id="adminUser-error" class="error-message" role="alert"></div>
+        </div>
+        
+        <div class="input-group">
+          <label for="adminPass" class="sr-only">অ্যাডমিন পাসওয়ার্ড</label>
+          <input 
+            type="password" 
+            id="adminPass" 
+            placeholder="অ্যাডমিন পাসওয়ার্ড" 
+            required 
+            autocomplete="current-password"
+            aria-describedby="adminPass-error"
+          />
+          <div id="adminPass-error" class="error-message" role="alert"></div>
+        </div>
+        
+        <button type="submit" class="admin-submit-btn">
+          <span class="btn-text">অ্যাডমিন হিসেবে লগইন করুন</span>
+          <span class="loading" style="display: none;"></span>
+        </button>
+      </form>
+      
+      <div id="messageContainer" class="message-container"></div>
+    </div>
+    
+    <div class="login-footer">
+      <p>
+        <a href="index.html" class="back-link">← মূল পেজে ফিরে যান</a>
+      </p>
+      <p class="footer-text">
+        লগইন করে আপনি আমাদের 
+        <a href="#" class="footer-link">গোপনীয়তা নীতি</a> 
+        এবং 
+        <a href="#" class="footer-link">ব্যবহারের শর্তাবলী</a> 
+        মেনে নিচ্ছেন।
+      </p>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
+
